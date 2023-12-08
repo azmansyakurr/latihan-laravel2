@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
- 
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +19,7 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 Route::get('/about', function () {
     $data = [
@@ -33,9 +33,17 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/product', [ProductController::class,'produk']);
-Route::get('/user', [UserController::class,'user']);
-Route::get('/user/create', [UserController::class,'create']);
-Route::post('/user', [UserController::class,'store']);
-Route::put('/user/{id}',[UserController::class,'update']);
-Route::delete('/user/{id}',[UserController::class,'destroy']);
+Route::get('/product', [ProductController::class, 'produk']);
+Route::get('/product/product/create', [ProductController::class, 'create']);
+Route::post('/product', [ProductController::class, 'store']);
+Route::get('/product/{id}/edit', [ProductController::class, 'edit']);
+Route::put('/product/{id}', [ProductController::class, 'update']);
+Route::delete('/product/{id}', [ProductController::class, 'destroy']);
+
+Route::get('/user', [UserController::class, 'user']);
+Route::get('/user/create', [UserController::class, 'create']);
+Route::post('/user', [UserController::class, 'store']);
+Route::put('/user/{id}', [UserController::class, 'update']);
+Route::delete('/user/{id}', [UserController::class, 'destroy']);
+
+Route::get('/profile', [ProfileController::class, 'profil']);
