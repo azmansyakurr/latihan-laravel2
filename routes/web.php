@@ -31,14 +31,20 @@ Route::get('/about', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->mi('home');
 
-Route::get('/product', [ProductController::class, 'produk']);
-Route::get('/product/product/create', [ProductController::class, 'create']);
-Route::post('/product', [ProductController::class, 'store']);
-Route::get('/product/{id}/edit', [ProductController::class, 'edit']);
-Route::put('/product/{id}', [ProductController::class, 'update']);
-Route::delete('/product/{id}', [ProductController::class, 'destroy']);
+Route::get('/product', [ProductController::class, 'produk'])
+    ->middleware('auth', 'admin');
+Route::get('/product/product/create', [ProductController::class, 'create'])
+    ->middleware('atuh', 'admin');
+Route::post('/product', [ProductController::class, 'store'])
+    ->middleware('atuh', 'admin');
+Route::get('/product/{id}/edit', [ProductController::class, 'edit'])
+    ->middleware('atuh', 'admin');
+Route::put('/product/{id}', [ProductController::class, 'update'])
+    ->middleware('atuh', 'admin');
+Route::delete('/product/{id}', [ProductController::class, 'destroy'])
+    ->middleware('atuh', 'admin');
 
 Route::get('/user', [UserController::class, 'user']);
 Route::get('/user/create', [UserController::class, 'create']);
