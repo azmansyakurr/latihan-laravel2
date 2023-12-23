@@ -31,20 +31,20 @@ Route::get('/about', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->mi('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/product', [ProductController::class, 'produk'])
     ->middleware('auth', 'admin');
 Route::get('/product/product/create', [ProductController::class, 'create'])
-    ->middleware('atuh', 'admin');
+    ->middleware('auth', 'admin');
 Route::post('/product', [ProductController::class, 'store'])
-    ->middleware('atuh', 'admin');
+    ->middleware('auth', 'admin');
 Route::get('/product/{id}/edit', [ProductController::class, 'edit'])
-    ->middleware('atuh', 'admin');
+    ->middleware('auth', 'admin');
 Route::put('/product/{id}', [ProductController::class, 'update'])
-    ->middleware('atuh', 'admin');
+    ->middleware('auth', 'admin');
 Route::delete('/product/{id}', [ProductController::class, 'destroy'])
-    ->middleware('atuh', 'admin');
+    ->middleware('auth', 'admin');
 
 Route::get('/user', [UserController::class, 'user']);
 Route::get('/user/create', [UserController::class, 'create']);

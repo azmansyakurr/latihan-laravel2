@@ -34,7 +34,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @auth
+                            @can('admin')
+                                <ul class="navbar-nav me-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/product">Product</a>
+                                    </li>
+                                    
+                                </ul>
+                            @endcan
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
