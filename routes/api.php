@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\CategoryApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +16,20 @@ use App\Http\Controllers\ApiController;
 |
 */
 
-Route::get('product', 'App\Http\Controllers\ApiController@index_product');
-Route::post('product/add', 'App\Http\Controllers\ApiController@product_store');
-Route::get('product/{id}', 'App\Http\Controllers\ApiController@product_by_id');
-Route::delete('product/{id}', 'App\Http\Controllers\ApiController@product_delete_by_id');
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/product', [ApiController::class, 'index']);
+Route::get('/product', [ApiController::class, 'store']);
+Route::get('/product/{id}', [ApiController::class, 'show']);
+Route::put('/product/edit/{id}', [ApiController::class, 'update']);
+Route::delete('/product/delete/{id}', [ApiController::class, 'destroy']);
+
+Route::prefix('category')->group(function () {
+    Route::get('/', [CategoryApiController::class, 'index']);
+    Route::post('/', [CategoryApiController::class, 'store']);
+    Route::get('/{id}', [CategoryApiController::class, 'show']);
+    Route::put('/edit/{id}', [CategoryApiController::class, 'update']);
+    Route::delete('/delete/{id}', [CategoryApiController::class, 'destroy']);
 });
